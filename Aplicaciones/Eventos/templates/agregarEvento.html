@@ -1,0 +1,102 @@
+{% extends "./plantilla.html" %}
+{% block contenido %}
+<div class="container d-flex justify-content-center mt-5">
+    <form action="/guardarEvento/" id="frm_guardar_evento" method="post" class="w-50">
+        <h3 class="mb-4 text-center">Formulario de Registro de Evento</h3>
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="txt_titulo" class="form-label"><b>Título del Evento</b></label>
+            <input type="text" name="txt_titulo" id="txt_titulo" class="form-control" maxlength="150" required>
+        </div>
+        <div class="mb-3">
+            <label for="txt_descripcion" class="form-label"><b>Descripción</b></label>
+            <textarea name="txt_descripcion" id="txt_descripcion" class="form-control" rows="4" required></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="ddl_categoria" class="form-label"><b>Categoría</b></label>
+            <select name="ddl_categoria" id="ddl_categoria" class="form-select" required>
+                <option value="" disabled selected>Seleccione una categoría</option>
+                <option value="recreativo">Recreativo</option>
+                <option value="cultural">Cultural</option>
+                <option value="deportivo">Deportivo</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="txt_fecha" class="form-label"><b>Fecha</b></label>
+            <input type="date" name="txt_fecha" id="txt_fecha" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label for="txt_hora" class="form-label"><b>Hora</b></label>
+            <input type="time" name="txt_hora" id="txt_hora" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label for="txt_ubicacion" class="form-label"><b>Ubicación</b></label>
+            <input type="text" name="txt_ubicacion" id="txt_ubicacion" class="form-control" maxlength="200" required>
+        </div>
+        <div class="mb-3">
+            <label for="txt_capacidad" class="form-label"><b>Capacidad</b></label>
+            <input type="number" name="txt_capacidad" id="txt_capacidad" class="form-control" min="1" required>
+        </div>
+        <div class="d-flex justify-content-center gap-3">
+            <button type="submit" class="btn btn-success">Guardar Evento</button>
+            <a href="/listadoEventos/" type="reset" class="btn btn-info">Cancelar</a>
+        </div>
+    </form>
+</div>
+
+
+
+<script>
+    $("#frm_guardar_evento").validate({
+        rules: {
+            "txt_titulo": {
+                required: true,
+            },
+            "txt_descripcion": {
+                required: true,
+            },
+            "ddl_categoria": {
+                required: true,
+            },
+            "txt_fecha": {
+                required: true,
+            },
+            "txt_hora": {
+                required: true,
+            },
+            "txt_ubicacion": {
+                required: true,
+            },
+            "txt_capacidad": {
+                required: true,
+                min: 1,
+            }
+        },
+        messages: {
+            "txt_titulo": {
+                required: "Ingrese el título del evento",
+            },
+            "txt_descripcion": {
+                required: "Ingrese una breve descripción",
+            },
+            "ddl_categoria": {
+                required: "Seleccione una categoría",
+            },
+            "txt_fecha": {
+                required: "Seleccione la fecha del evento",
+            },
+            "txt_hora": {
+                required: "Seleccione la hora del evento",
+            },
+            "txt_ubicacion": {
+                required: "Ingrese la ubicación del evento",
+            },
+            "txt_capacidad": {
+                required: "Ingrese la capacidad del evento",
+                min: "La capacidad debe ser al menos 1",
+            }
+        }
+    });
+</script>
+
+{% endblock %}

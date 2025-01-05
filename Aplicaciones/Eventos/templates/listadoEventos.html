@@ -1,0 +1,34 @@
+{% extends "./plantilla.html" %}
+{% block contenido %}
+<br>
+<h1>Lista de Eventos</h1>
+<table class="table table-bordered table-striped table-hover">
+    <tr>
+        <th>ID</th>
+        <th>TÍTULO</th>
+        <th>DESCRIPCIÓN</th>
+        <th>CATEGORÍA</th>
+        <th>FECHA</th>
+        <th>HORA</th>
+        <th>UBICACIÓN</th>
+        <th>CAPACIDAD</th>
+        <th>ACCIONES</th>
+    </tr>
+    {% for evento in eventos %}
+        <tr>
+            <td>{{ evento.id_evento }}</td>
+            <td>{{ evento.titulo }}</td>
+            <td>{{ evento.descripcion }}</td>
+            <td>{{ evento.categoria }}</td> 
+            <td>{{ evento.fecha }}</td>
+            <td>{{ evento.hora }}</td>
+            <td>{{ evento.ubicacion }}</td>
+            <td>{{ evento.capacidad }}</td>
+            <td style="display: flex; justify-content: space-between; font-size: 1.3rem;">
+                <a style="margin-left: 25px; color: green;" href="/editarEvento/{{ evento.id_evento }}" class="fa-solid fa-pen"></a>
+                <a style="margin-right: 25px; color: red;" onclick="return confirm('¿Está seguro?');" href="" class="fa-solid fa-trash"></a>
+            </td>
+        </tr>
+    {% endfor %}
+</table>
+{% endblock %}

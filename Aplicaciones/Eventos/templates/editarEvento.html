@@ -1,0 +1,48 @@
+{% extends "./plantilla.html" %}
+{% block contenido %}
+<div class="container d-flex justify-content-center mt-5">
+    <form action="/procesarEdicionEvento/" id="frm_editar_evento" method="post" class="w-50">
+        <h3 class="mb-4 text-center">Editar Evento</h3>
+        {% csrf_token %}
+        <!-- Campo oculto para el ID del evento -->
+        <input type="hidden" name="id_evento" value="{{ evento.id_evento }}">
+
+        <div class="mb-3">
+            <label for="txt_titulo" class="form-label"><b>Título del Evento</b></label>
+            <input type="text" name="txt_titulo" id="txt_titulo" value="{{ evento.titulo }}" class="form-control" maxlength="150" required>
+        </div>
+        <div class="mb-3">
+            <label for="txt_descripcion" class="form-label"><b>Descripción</b></label>
+            <textarea name="txt_descripcion" id="txt_descripcion" class="form-control" rows="4" required>{{ evento.descripcion }}</textarea>
+        </div>
+        <div class="mb-3">
+            <label for="ddl_categoria" class="form-label"><b>Categoría</b></label>
+            <select name="ddl_categoria" id="ddl_categoria" class="form-select" required>
+                <option value="recreativo" {% if evento.categoria == "recreativo" %}selected{% endif %}>Recreativo</option>
+                <option value="cultural" {% if evento.categoria == "cultural" %}selected{% endif %}>Cultural</option>
+                <option value="deportivo" {% if evento.categoria == "deportivo" %}selected{% endif %}>Deportivo</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="txt_fecha" class="form-label"><b>Fecha</b></label>
+            <input type="date" name="txt_fecha" id="txt_fecha" value="{{ evento.fecha|date:'Y-m-d' }}" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label for="txt_hora" class="form-label"><b>Hora</b></label>
+            <input type="time" name="txt_hora" id="txt_hora" value="{{ evento.hora }}" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label for="txt_ubicacion" class="form-label"><b>Ubicación</b></label>
+            <input type="text" name="txt_ubicacion" id="txt_ubicacion" value="{{ evento.ubicacion }}" class="form-control" maxlength="200" required>
+        </div>
+        <div class="mb-3">
+            <label for="txt_capacidad" class="form-label"><b>Capacidad</b></label>
+            <input type="number" name="txt_capacidad" id="txt_capacidad" value="{{ evento.capacidad }}" class="form-control" min="1" required>
+        </div>
+        <div class="d-flex justify-content-center gap-3">
+            <button type="submit" class="btn btn-success">Guardar Cambios</button>
+            <a href="/listadoEventos/" class="btn btn-info">Cancelar</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

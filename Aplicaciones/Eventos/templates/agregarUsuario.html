@@ -1,0 +1,81 @@
+{%  extends "./plantilla.html" %}
+{% block contenido %}
+<div class="container d-flex justify-content-center mt-5">
+    <form action="/guardarUsuario/" id="frm_nuevo_usuario" method="post" class="w-50">
+        <h3 class="mb-4 text-center">Agregar Usuario</h3>
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="txt_matricula" class="form-label"><b>MATRÍCULA:</b></label>
+            <input type="text" name="txt_matricula" id="txt_matricula" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label for="txt_nombre" class="form-label"><b>NOMBRE:</b></label>
+            <input type="text" name="txt_nombre" id="txt_nombre" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label for="txt_apellido" class="form-label"><b>APELLIDO:</b></label>
+            <input type="text" name="txt_apellido" id="txt_apellido" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label for="txt_email" class="form-label"><b>EMAIL:</b></label>
+            <input type="email" name="txt_email" id="txt_email" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label for="txt_tipo_usuario" class="form-label"><b>TIPO DE USUARIO:</b></label>
+            <select name="txt_tipo_usuario" id="txt_tipo_usuario" class="form-control" required>
+                <option value="estudiante">Estudiante</option>
+                <option value="administrador">Administrador</option>
+            </select>
+        </div>
+        <div class="d-flex justify-content-center gap-3">
+            <button type="submit" class="btn btn-success">Guardar</button>
+            <a href="/listadoUsuarios/" type="reset" class="btn btn-info">Cancelar</a>
+        </div>
+    </form>
+</div>
+<script>
+    $("#frm_nuevo_usuario").validate({
+        rules:{
+           "txt_matricula":{
+            required:true,
+            numeros:true,
+           },
+           "txt_nombre":{
+            required:true,
+            letras:true,
+           },
+           "txt_apellido":{
+            required:true,
+            letras:true,
+           },
+           "txt_email":{
+            required:true,
+            email:true
+           },
+
+        },
+        messages:{
+            "txt_matricula":{
+            required:"Ingrese el numero de matricula",
+            numeros:"Este campo solo acepta numeros"
+           },
+           "txt_nombre":{
+            required:"Ingrese su nombre",
+            numeros:"Este campo solo acepta letras"
+           },
+           "txt_apellido":{
+            required:"Ingrese su apellido",
+            numeros:"Este campo solo acepta letras"
+           },
+            "txt_email":{
+            required:"Ingrese el correo",
+            email:"Ingrese un correo valido"
+           },
+
+
+        }
+    });
+</script> 
+
+
+{% endblock %}

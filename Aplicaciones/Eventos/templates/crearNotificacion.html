@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block contenido %}
+<div class="container mt-5">
+    <h3 class="text-center">Crear Notificación</h3>
+    <form method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="usuario" class="form-label"><b>Usuario</b></label>
+            {{ form.usuario }}
+        </div>
+        <div class="mb-3">
+            <label for="evento" class="form-label"><b>Evento</b></label>
+            {{ form.evento }}
+        </div>
+        <div class="mb-3">
+            <label for="tipo" class="form-label"><b>Tipo de Notificación</b></label>
+            {{ form.tipo }}
+        </div>
+        <div class="mb-3">
+            <label for="mensaje" class="form-label"><b>Mensaje</b></label>
+            {{ form.mensaje }}
+        </div>
+        <button type="submit" class="btn btn-primary">Crear Notificación</button>
+    </form>
+</div>
+{% endblock %}
+

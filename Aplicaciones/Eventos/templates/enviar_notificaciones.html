@@ -1,0 +1,11 @@
+<!-- enviar_notificacion.html -->
+{% extends "base.html" %}
+
+{% block contenido %}
+    <h1>Enviar Notificación</h1>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-success">Enviar Notificación</button>
+    </form>
+{% endblock %}

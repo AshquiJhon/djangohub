@@ -1,0 +1,67 @@
+{% extends "./plantilla.html" %}
+{% block contenido %}
+<div class="container d-flex justify-content-center mt-5">
+    <form action="/guardarParticipacion/" id="frm_guardar_participacion" method="post" class="w-50">
+        <h3 class="mb-4 text-center">Formulario de Registro de Participación</h3>
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="txt_fecha" class="form-label"><b>Fecha</b></label>
+            <input type="date" name="txt_fecha" id="txt_fecha" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label for="ddl_usuario" class="form-label"><b>Usuario:</b></label>
+            <select name="ddl_usuario" id="ddl_usuario" class="form-select" required>
+                <option value="" disabled selected>Seleccione un usuario</option>
+                {% for usuario in usuarios %}
+                <option value="{{ usuario.id_usuario }}">{{ usuario.apellido }} {{ usuario.nombre }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="ddl_evento" class="form-label"><b>Evento:</b></label>
+            <select name="ddl_evento" id="ddl_evento" class="form-select" required>
+                <option value="" disabled selected>Seleccione un evento</option>
+                {% for evento in eventos %}
+                <option value="{{ evento.id_evento }}">{{ evento.titulo }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="d-flex justify-content-center gap-3">
+            <button type="submit" class="btn btn-success">Guardar Participación</button>
+            <a href="/listadoParticipacion/" class="btn btn-info">Cancelar</a>
+        </div>
+    </form>
+</div>
+
+<script>
+    // Validación del formulario
+    $("#frm_guardar_participacion").validate({
+        rules: {
+            "txt_fecha": {
+                required: true,
+            },
+            "ddl_usuario": {
+                required: true,
+            },
+            "ddl_evento": {
+                required: true,
+            }
+        },
+        messages: {
+            "txt_fecha": {
+                required: "Seleccione una fecha",
+            },
+            "ddl_usuario": {
+                required: "Seleccione un usuario",
+            },
+            "ddl_evento": {
+                required: "Seleccione un evento",
+            }
+        }
+    });
+</script>
+
+{% endblock %}
+
+
+
